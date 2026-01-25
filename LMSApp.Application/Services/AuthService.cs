@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LMSApp.Application.Extensions;
+﻿using LMSApp.Application.Extensions;
 using LMSApp.Application.Interfaces;
 using LMSApp.Domain.Entities.Auth;
 using LMSApp.Domain.Models.JWT;

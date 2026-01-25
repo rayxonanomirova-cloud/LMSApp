@@ -1,5 +1,4 @@
-﻿
-using LMSApp.Application.Interfaces;
+﻿using LMSApp.Application.Interfaces;
 using LMSApp.Domain.Entities.Auth;
 using LMSApp.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
