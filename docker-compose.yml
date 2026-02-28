@@ -1,0 +1,6 @@
+services:
+  lmsapp.api:
+    image: ${DOCKER_REGISTRY-}lmsappapi
+    build:
+      context: .
+      dockerfile: LMSApp.API/Dockerfile
