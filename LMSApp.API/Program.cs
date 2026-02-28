@@ -17,13 +17,8 @@ var app = builder.Build().MainConfiguration();
 
 // Configure the HTTP request pipeline.
 
-// ? BULARNI QO'SHING (NSwag metodlari):
-app.UseOpenApi(); // OpenAPI spec generatsiya qiladi
-app.UseSwaggerUi(settings =>
-{
-    settings.Path = ""; // Swagger UI asosiy sahifada ochiladi
-    settings.DocumentPath = "/swagger/v1/swagger.json";
-});
+app.UseOpenApi();
+app.UseSwaggerUi();
 
 app.UseHttpsRedirection();
 app.UseAuthentication();

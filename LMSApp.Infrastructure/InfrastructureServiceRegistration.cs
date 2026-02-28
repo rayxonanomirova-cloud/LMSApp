@@ -47,7 +47,7 @@ namespace LMSApp.Infrastructure
             using (var scope = app.Services.CreateScope())
             {
                 var context = scope.ServiceProvider.GetRequiredService<LMSAppContext>();
-                //context.Database.Migrate();
+                context.Database.Migrate();
             }
             return app;
         }
