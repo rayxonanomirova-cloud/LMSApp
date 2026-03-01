@@ -1,5 +1,4 @@
-﻿
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using LMSApp.Domain.Models;
 
 namespace LMSApp.Application.Helpers
@@ -12,10 +11,10 @@ namespace LMSApp.Application.Helpers
 
             return new UserProfile()
             {
-                Id = Guid.Parse(clims.FirstOrDefault(x => x.Type == "id").Value),
-                UserName = clims.FirstOrDefault(x => x.Type == "UserName").Value,
-                ActiveRole = clims.FirstOrDefault(x => x.Type == "MainRoleId").Value,
-                Roles = clims.Where(x => x.Type == "AllRoles").Select(x => x.Value).ToArray()
+                Id = Guid.Parse(clims.FirstOrDefault(x => x.Type == "Id")?.Value),
+                UserName = clims.FirstOrDefault(x => x.Type == "UserName")?.Value,
+                ActiveRole = clims.FirstOrDefault(x => x.Type == "MainRoleId")?.Value,
+                Roles = clims.Where(x => x.Type == "AllRoles").Select(x => x.Value)?.ToArray()
             };
         }
     }

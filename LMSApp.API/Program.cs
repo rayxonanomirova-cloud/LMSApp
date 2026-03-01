@@ -1,4 +1,5 @@
 using LMSApp.Application;
+using LMSApp.Application.Middlewares;
 using LMSApp.Domain.Models.JWT;
 using LMSApp.Infrastructure;
 
@@ -21,10 +22,10 @@ app.UseOpenApi();
 app.UseSwaggerUi();
 
 app.UseHttpsRedirection();
+
 app.UseAuthentication();
+app.CustomTokenValidationMiddleware();
 app.UseAuthorization();
-
-
 
 app.MapControllers();
 

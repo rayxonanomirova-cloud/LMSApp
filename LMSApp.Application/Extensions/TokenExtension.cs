@@ -1,10 +1,7 @@
-﻿
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 using LMSApp.Domain.Entities.Auth;
-using LMSApp.Domain.Models;
 using LMSApp.Domain.Models.JWT;
 using LMSApp.Domain.Models.TokenModels;
 using Microsoft.AspNetCore.Identity;
@@ -27,29 +24,28 @@ namespace LMSApp.Application.Extensions
             };
         }
 
-        public static async Task<TokenModel> GetTokenAsync(ApplicationUser user, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager,JWTSetting jWTSetting)
+        public static async Task<AccessTokenModel> GetTokenAsync(ApplicationUser user, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager,JWTSetting jWTSetting)
         {
             AddClaim(user);
-            await AddRolesToClaises(userManager, roleManager, user);
+            await AddRolesToClaims(userManager, roleManager, user);
             
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jWTSetting.JWT.Secret));
 
             var token =new JwtSecurityToken(
                 issuer: jWTSetting.JWT.ValidIssuer,
                 audience: jWTSetting.JWT.ValidAudience,
-                expires: DateTime.Now.AddHours(jWTSetting.JWT.ExpiresInHours),
+                expires: DateTime.UtcNow.AddMinutes(jWTSetting.JWT.ExpdsiresAccessTokenInMinutes),
                 claims: authClaims,
                 signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
                 );
 
-            return new TokenModel
+            return new AccessTokenModel
             {
-                Token = new JwtSecurityTokenHandler().WriteToken(token),
-                Expiration = token.ValidTo
+                AccessToken = new JwtSecurityTokenHandler().WriteToken(token)
             };
         }
 
-        private static async Task AddRolesToClaises(UserManager<ApplicationUser> userManager,RoleManager<ApplicationRole> roleManager, ApplicationUser user)
+        private static async Task AddRolesToClaims(UserManager<ApplicationUser> userManager,RoleManager<ApplicationRole> roleManager, ApplicationUser user)
         {
             var userRoles = await userManager.GetRolesAsync(user);
             foreach (var userRole in userRoles)
@@ -74,9 +70,6 @@ namespace LMSApp.Application.Extensions
                 if (mainRole != null)
                     authClaims.Add(new Claim(ClaimTypes.Role, mainRole?.Name));
             }
-
-            user.UpdateLastActive();
-            await userManager.UpdateAsync(user);
         }
     }
 }

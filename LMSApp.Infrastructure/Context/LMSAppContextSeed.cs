@@ -1,5 +1,4 @@
-﻿
-using LMSApp.Domain.Entities.Auth;
+﻿using LMSApp.Domain.Entities.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

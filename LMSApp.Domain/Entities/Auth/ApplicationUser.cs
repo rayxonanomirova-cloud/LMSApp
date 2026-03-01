@@ -15,9 +15,12 @@ public class ApplicationUser : IdentityUser<Guid>
     public int CountEnter { get; set; }
     public DateTime LastActive { get; set; }
     public string? Address { get; set; }
+    public string? OrgName { get; set; }
     public int? RegionId { get; set; }
     public int? DistrictId { get; set; }
-
+    public int? OrgId { get; set; }
+    public string? RefreshToken { get; set; }
+    public DateTime? RefreshTokenExpiryTime { get; set; }
     public void UpdateLastActive()
     {
         LastActive = DateTime.UtcNow.AddHours(5);

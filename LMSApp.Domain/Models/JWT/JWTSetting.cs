@@ -12,6 +12,7 @@ namespace LMSApp.Domain.Models.JWT
         public string ValidAudience { get; set; }
         public string ValidIssuer { get; set; }
         public string Secret { get; set; }
-        public int ExpiresInHours { get; set; } = 12;
+        public int ExpiresRefreshTokenInHours { get; set; } = 12;
+        public int ExpdsiresAccessTokenInMinutes { get; set; } = 2;
     }
 }

@@ -1,5 +1,4 @@
 ﻿using LMSApp.Application.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LMSApp.API.Controllers

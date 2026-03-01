@@ -6,6 +6,8 @@ namespace LMSApp.Application.Interfaces
 {
     public interface IAuthService
     {
-        Task<TokenModel> Login(LoginModel loginModel);
+        Task<TokenModel> LoginAsync(LoginModel loginModel);
+        Task<AccessTokenModel> AccessTokenAsync(string refreshToken);
+        Task<bool> GogoutAsync(Guid userId);
     }
 }
